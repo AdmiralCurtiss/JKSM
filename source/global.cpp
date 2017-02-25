@@ -33,6 +33,7 @@ bool hbl = false, devMode = false, kill = false;
 //config
 bool centered = true, autoBack = false, useLang = false;
 bool Config_AutomaticallySetFilenameAsDateTime = false;
+DateTimeFormat Config_PreferredDateTimeFormat = DateTimeFormat::FORMAT_YMD;
 
 //default colors
 u8 clearColor[3] = {0, 0, 0};

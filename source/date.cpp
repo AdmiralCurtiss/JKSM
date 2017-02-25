@@ -4,6 +4,16 @@
 
 #include "date.h"
 
+std::string GetDateTimeFormatString(DateTimeFormat format)
+{
+    switch (format)
+    {
+        case DateTimeFormat::FORMAT_YDM: return "YYYY-DD-MM";
+        case DateTimeFormat::FORMAT_YMD: return "YYYY-MM-DD";
+        default: return "UNKNOWN";
+    }
+}
+
 //This returns the date as a string
 std::string GetDate(DateTimeFormat Format)
 {

@@ -6,6 +6,7 @@
 
 #include <string>
 
+#include "date.h"
 #include "titledata.h"
 
 //this is for backup/restore modes
@@ -51,6 +52,7 @@ extern bool devMode, hbl, kill;
 //config
 extern bool centered, autoBack, useLang;
 extern bool Config_AutomaticallySetFilenameAsDateTime;
+extern DateTimeFormat Config_PreferredDateTimeFormat;
 
 //Allows app to be killed by hitting start
 void killApp(u32 up);

@@ -106,6 +106,7 @@ enum extraOpts
     autoBackAtRest,
     useSysLang,
     automaticallySetFilenameAsDateTime,
+    preferredDateTimeFormat,
     bgColor,
     slColor,
     unslColor,
@@ -128,6 +129,7 @@ void saveCfg()
     fputc(autoBack, config);
     fputc(useLang, config);
     fputc(Config_AutomaticallySetFilenameAsDateTime, config);
+    fputc(static_cast<int>(Config_PreferredDateTimeFormat) & 0xFF, config);
 
     fclose(config);
 }
@@ -140,6 +142,13 @@ void switchBool(bool *sw)
         *sw = true;
 }
 
+void cycleInt(int* sw, int max)
+{
+    ++(*sw);
+    if (*sw >= max)
+        *sw = 0;
+}
+
 static menu extra(136, 80, false, true);
 
 void prepExtras()
@@ -149,6 +158,7 @@ void prepExtras()
     extra.addItem(std::string("Auto Backup: " + onOff(autoBack)).c_str());
     extra.addItem(std::string("Use System Language: " + onOff(useLang)).c_str());
     extra.addItem(std::string("Auto Filename: " + onOff(Config_AutomaticallySetFilenameAsDateTime)).c_str());
+    extra.addItem(std::string("Preferred Date Format: " + GetDateTimeFormatString(Config_PreferredDateTimeFormat)).c_str());
     extra.addItem("Set Background Color");
     extra.addItem("Set Selected Item Color");
     extra.addItem("Set Unselected Item Color");
@@ -164,6 +174,7 @@ static const std::string helpDescs[] =
     "Automatically creates a backup when save data is imported. Just in case!",
     "Uses system language when getting titles. Defaults to English if title is empty.",
     "Automatically sets the filename to the current date and time instead of asking when exporting a save to a new folder.",
+    "Set the preferred date and time format.",
     "Sets the background color. Asks for RGB info in that order",
     "Sets the color of selected options in menus. Asks for RGB info in that order",
     "Sets the color of unselected menu options. Asks for RGB info in that order",
@@ -205,6 +216,15 @@ void extrasMenu()
                 extra.updateItem(extraOpts::automaticallySetFilenameAsDateTime, std::string("Auto Filename: " + onOff(Config_AutomaticallySetFilenameAsDateTime)).c_str());
                 saveCfg();
                 break;
+            case extraOpts::preferredDateTimeFormat:
+            {
+                int tmp = static_cast<int>(Config_PreferredDateTimeFormat);
+                cycleInt(&tmp, static_cast<int>(DateTimeFormat::COUNT));
+                Config_PreferredDateTimeFormat = static_cast<DateTimeFormat>(tmp);
+                extra.updateItem(extraOpts::preferredDateTimeFormat, std::string("Preferred Date Format: " + GetDateTimeFormatString(Config_PreferredDateTimeFormat)).c_str());
+                saveCfg();
+                break;
+            }
             case extraOpts::bgColor:
                 setBGColor();
                 break;

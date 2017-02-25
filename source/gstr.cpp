@@ -14,7 +14,7 @@
 std::string GetString(const char *hint, bool allowAutoFilename)
 {
     if (allowAutoFilename && Config_AutomaticallySetFilenameAsDateTime)
-        return GetDate(DateTimeFormat::FORMAT_YMD);
+        return GetDate(Config_PreferredDateTimeFormat);
 
     hidScanInput();
 
@@ -34,7 +34,7 @@ std::string GetString(const char *hint, bool allowAutoFilename)
     for (size_t i = 0; i < dates.size(); ++i) {
         swkbdSetDictWord(&dates[i], "2016", GetDate(static_cast<DateTimeFormat>(i)).c_str());
     }
-    std::string initialText = GetDate(DateTimeFormat::FORMAT_YMD);
+    std::string initialText = GetDate(Config_PreferredDateTimeFormat);
     swkbdSetInitialText(&keyState, initialText.c_str());
     swkbdSetDictionary(&keyState, &dates[0], static_cast<int>(dates.size()));
 

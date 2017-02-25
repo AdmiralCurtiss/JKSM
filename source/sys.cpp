@@ -61,6 +61,10 @@ void loadCfg()
     if (tmp == EOF) { fclose(config); return; }
     Config_AutomaticallySetFilenameAsDateTime = static_cast<bool>(tmp);
 
+    tmp = fgetc(config);
+    if (tmp == EOF) { fclose(config); return; }
+    Config_PreferredDateTimeFormat = tmp >= static_cast<int>(DateTimeFormat::COUNT) ? DateTimeFormat::FORMAT_YMD : static_cast<DateTimeFormat>(tmp);
+
     fclose(config);
 }
 
