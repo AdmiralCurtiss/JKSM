@@ -42,10 +42,20 @@ void loadCol()
 void loadCfg()
 {
     FILE *config = fopen("config", "rb");
+    if (!config) { return; }
+    int tmp;
 
-    centered = fgetc(config);
-    autoBack = fgetc(config);
-    useLang = fgetc(config);
+    tmp = fgetc(config);
+    if (tmp == EOF) { fclose(config); return; }
+    centered = static_cast<bool>(tmp);
+
+    tmp = fgetc(config);
+    if (tmp == EOF) { fclose(config); return; }
+    autoBack = static_cast<bool>(tmp);
+
+    tmp = fgetc(config);
+    if (tmp == EOF) { fclose(config); return; }
+    useLang = static_cast<bool>(tmp);
 
     fclose(config);
 }
