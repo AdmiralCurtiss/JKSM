@@ -82,7 +82,7 @@ void menu::addItem(const std::u16string a)
 void menu::updateItem(int i, const char *a)
 {
     char32_t tmp[128];
-    memset(tmp, 0, 128);
+    memset(tmp, 0, sizeof(char32_t) * 128);
 
     utf8_to_utf32((uint32_t *)tmp, (uint8_t *)a, 128);
 
