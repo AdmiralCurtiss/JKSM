@@ -10,7 +10,7 @@ enum class DateTimeFormat
     COUNT
 };
 
-char *GetDate(DateTimeFormat Format);
+std::string GetDate(DateTimeFormat Format);
 std::string RetTime();
 
 #endif // DATE_H

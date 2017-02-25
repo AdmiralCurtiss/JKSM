@@ -89,7 +89,7 @@ bool backupData(const titleData dat, FS_Archive arch, int mode, bool autoName)
     //if auto, just use date/time
     if(autoName)
     {
-        slot = tou16(GetDate(DateTimeFormat::FORMAT_YMD));
+        slot = tou16(GetDate(DateTimeFormat::FORMAT_YMD).c_str());
         if(autoBack)
             slot += tou16(" - AutoBack");
     }

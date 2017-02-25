@@ -4,10 +4,10 @@
 
 #include "date.h"
 
-//This returns the date as a c string
-char *GetDate(DateTimeFormat Format)
+//This returns the date as a string
+std::string GetDate(DateTimeFormat Format)
 {
-    char *Ret = new char[24];
+    char Ret[24];
 
     time_t Raw;
     time(&Raw);
@@ -28,7 +28,7 @@ char *GetDate(DateTimeFormat Format)
             }
     }
 
-    return Ret;
+    return std::string(Ret);
 }
 
 //this returns the time for the top bar

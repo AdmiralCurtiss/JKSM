@@ -29,9 +29,10 @@ std::string GetString(const char *hint)
     swkbdSetFeatures(&keyState, SWKBD_PREDICTIVE_INPUT);
     std::array<SwkbdDictWord, static_cast<size_t>(DateTimeFormat::COUNT)> dates;
     for (size_t i = 0; i < dates.size(); ++i) {
-        swkbdSetDictWord(&dates[i], "2016", GetDate(static_cast<DateTimeFormat>(i)));
+        swkbdSetDictWord(&dates[i], "2016", GetDate(static_cast<DateTimeFormat>(i)).c_str());
     }
-    swkbdSetInitialText(&keyState, GetDate(DateTimeFormat::FORMAT_YMD));
+    std::string initialText = GetDate(DateTimeFormat::FORMAT_YMD);
+    swkbdSetInitialText(&keyState, initialText.c_str());
     swkbdSetDictionary(&keyState, &dates[0], static_cast<int>(dates.size()));
 
     swkbdInputText(&keyState, input, 64);
