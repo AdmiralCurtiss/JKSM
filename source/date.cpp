@@ -21,6 +21,7 @@ char *GetDate(DateTimeFormat Format)
                 break;
             }
         case DateTimeFormat::FORMAT_YMD:
+        default:
             {
                 sprintf(Ret, "%04d-%02d-%02d_%02d-%02d-%02d", Time->tm_year + 1900, Time->tm_mon + 1, Time->tm_mday, Time->tm_hour, Time->tm_min, Time->tm_sec);
                 break;
