@@ -7,6 +7,7 @@ enum class DateTimeFormat
 {
     FORMAT_YDM,
     FORMAT_YMD,
+    COUNT
 };
 
 char *GetDate(DateTimeFormat Format);

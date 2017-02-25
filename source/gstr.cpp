@@ -1,3 +1,4 @@
+#include <array>
 #include <string>
 
 #include <3ds.h>
@@ -26,11 +27,12 @@ std::string GetString(const char *hint)
     swkbdInit(&keyState, SWKBD_TYPE_NORMAL, 2, 64);
     swkbdSetHintText(&keyState, hint);
     swkbdSetFeatures(&keyState, SWKBD_PREDICTIVE_INPUT);
-    SwkbdDictWord dates[2];
-    swkbdSetDictWord(&dates[0], "2016", GetDate(DateTimeFormat::FORMAT_YDM));
-    swkbdSetDictWord(&dates[1], "2016", GetDate(DateTimeFormat::FORMAT_YMD));
+    std::array<SwkbdDictWord, static_cast<size_t>(DateTimeFormat::COUNT)> dates;
+    for (size_t i = 0; i < dates.size(); ++i) {
+        swkbdSetDictWord(&dates[i], "2016", GetDate(static_cast<DateTimeFormat>(i)));
+    }
     swkbdSetInitialText(&keyState, GetDate(DateTimeFormat::FORMAT_YMD));
-    swkbdSetDictionary(&keyState, dates, 2);
+    swkbdSetDictionary(&keyState, &dates[0], static_cast<int>(dates.size()));
 
     swkbdInputText(&keyState, input, 64);
 
