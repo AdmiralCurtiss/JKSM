@@ -7,6 +7,8 @@ enum class DateTimeFormat
 {
     FORMAT_YDM,
     FORMAT_YMD,
+    FORMAT_DMY,
+    FORMAT_MDY,
     COUNT
 };
 

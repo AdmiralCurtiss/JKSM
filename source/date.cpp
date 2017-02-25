@@ -10,6 +10,8 @@ std::string GetDateTimeFormatString(DateTimeFormat format)
     {
         case DateTimeFormat::FORMAT_YDM: return "YYYY-DD-MM";
         case DateTimeFormat::FORMAT_YMD: return "YYYY-MM-DD";
+        case DateTimeFormat::FORMAT_DMY: return "DD-MM-YYYY";
+        case DateTimeFormat::FORMAT_MDY: return "MM-DD-YYYY";
         default: return "UNKNOWN";
     }
 }
@@ -34,6 +36,16 @@ std::string GetDate(DateTimeFormat Format)
         default:
             {
                 sprintf(Ret, "%04d-%02d-%02d_%02d-%02d-%02d", Time->tm_year + 1900, Time->tm_mon + 1, Time->tm_mday, Time->tm_hour, Time->tm_min, Time->tm_sec);
+                break;
+            }
+        case DateTimeFormat::FORMAT_DMY:
+            {
+                sprintf(Ret, "%02d-%02d-%04d_%02d-%02d-%02d", Time->tm_mday, Time->tm_mon + 1, Time->tm_year + 1900, Time->tm_hour, Time->tm_min, Time->tm_sec);
+                break;
+            }
+        case DateTimeFormat::FORMAT_MDY:
+            {
+                sprintf(Ret, "%02d-%02d-%04d_%02d-%02d-%02d", Time->tm_mon + 1, Time->tm_mday, Time->tm_year + 1900, Time->tm_hour, Time->tm_min, Time->tm_sec);
                 break;
             }
     }
