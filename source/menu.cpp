@@ -49,7 +49,7 @@ menu::~menu()
 
 void menu::addItem(const char *a)
 {
-    char32_t *tmp = new char32_t[128];
+    char32_t tmp[128];
     memset(tmp, 0, sizeof(char32_t) * 128);
     utf8_to_utf32((uint32_t *)tmp, (uint8_t *)a, 128);
 
@@ -59,13 +59,11 @@ void menu::addItem(const char *a)
     menuItem add(t, center, x);
 
     opts.push_back(add);
-
-    delete[] tmp;
 }
 
 void menu::addItem(const std::u16string a)
 {
-    char32_t *tmp = new char32_t[128];
+    char32_t tmp[128];
     memset(tmp, 0, sizeof(char32_t) * 128);
     utf16_to_utf32((uint32_t *)tmp, (uint16_t *)a.data(), 128);
 
@@ -75,8 +73,6 @@ void menu::addItem(const std::u16string a)
     menuItem add(t, center, x);
 
     opts.push_back(add);
-
-    delete[] tmp;
 }
 
 void menu::updateItem(int i, const char *a)
