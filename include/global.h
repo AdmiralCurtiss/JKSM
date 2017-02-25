@@ -50,6 +50,7 @@ extern FS_Archive sdArch;
 extern bool devMode, hbl, kill;
 //config
 extern bool centered, autoBack, useLang;
+extern bool Config_AutomaticallySetFilenameAsDateTime;
 
 //Allows app to be killed by hitting start
 void killApp(u32 up);

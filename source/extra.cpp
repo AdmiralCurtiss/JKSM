@@ -105,6 +105,7 @@ enum extraOpts
     centeredText,
     autoBackAtRest,
     useSysLang,
+    automaticallySetFilenameAsDateTime,
     bgColor,
     slColor,
     unslColor,
@@ -126,6 +127,7 @@ void saveCfg()
     fputc(centered, config);
     fputc(autoBack, config);
     fputc(useLang, config);
+    fputc(Config_AutomaticallySetFilenameAsDateTime, config);
 
     fclose(config);
 }
@@ -146,6 +148,7 @@ void prepExtras()
     extra.addItem(std::string("Centered text: " + onOff(centered)).c_str());
     extra.addItem(std::string("Auto Backup: " + onOff(autoBack)).c_str());
     extra.addItem(std::string("Use System Language: " + onOff(useLang)).c_str());
+    extra.addItem(std::string("Auto Filename: " + onOff(Config_AutomaticallySetFilenameAsDateTime)).c_str());
     extra.addItem("Set Background Color");
     extra.addItem("Set Selected Item Color");
     extra.addItem("Set Unselected Item Color");
@@ -160,6 +163,7 @@ static const std::string helpDescs[] =
     "Sets whether title select, nand title select, and folder select menus are centered. (Requires reboot to take effect.)",
     "Automatically creates a backup when save data is imported. Just in case!",
     "Uses system language when getting titles. Defaults to English if title is empty.",
+    "Automatically sets the filename to the current date and time instead of asking when exporting a save to a new folder.",
     "Sets the background color. Asks for RGB info in that order",
     "Sets the color of selected options in menus. Asks for RGB info in that order",
     "Sets the color of unselected menu options. Asks for RGB info in that order",
@@ -194,6 +198,11 @@ void extrasMenu()
             case extraOpts::useSysLang:
                 switchBool(&useLang);
                 extra.updateItem(extraOpts::useSysLang, std::string("Use System Language: " + onOff(useLang)).c_str());
+                saveCfg();
+                break;
+            case extraOpts::automaticallySetFilenameAsDateTime:
+                switchBool(&Config_AutomaticallySetFilenameAsDateTime);
+                extra.updateItem(extraOpts::automaticallySetFilenameAsDateTime, std::string("Auto Filename: " + onOff(Config_AutomaticallySetFilenameAsDateTime)).c_str());
                 saveCfg();
                 break;
             case extraOpts::bgColor:

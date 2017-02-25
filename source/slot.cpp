@@ -59,7 +59,7 @@ std::u16string getFolder(const titleData dat, int mode, bool newFolder)
 
         if( (down & KEY_A) && ((u32)folderMenu.getSelected() + 1 > dir.count()))
         {
-            ret = tou16(GetString("Enter a name for the new folder.").c_str());
+            ret = tou16(GetString("Enter a name for the new folder.", true).c_str());
             break;
         }
         else if(down & KEY_A)
@@ -69,7 +69,7 @@ std::u16string getFolder(const titleData dat, int mode, bool newFolder)
         }
         else if(down & KEY_X)
         {
-            std::u16string newName = tou16(GetString("Enter a new name.").c_str());
+            std::u16string newName = tou16(GetString("Enter a new name.", false).c_str());
             if(!newName.empty() && (u32)folderMenu.getSelected() < dir.count())
             {
                 std::u16string oldPath = path + dir.retItem(folderMenu.getSelected());

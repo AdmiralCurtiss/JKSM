@@ -57,6 +57,10 @@ void loadCfg()
     if (tmp == EOF) { fclose(config); return; }
     useLang = static_cast<bool>(tmp);
 
+    tmp = fgetc(config);
+    if (tmp == EOF) { fclose(config); return; }
+    Config_AutomaticallySetFilenameAsDateTime = static_cast<bool>(tmp);
+
     fclose(config);
 }
 

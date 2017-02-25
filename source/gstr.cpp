@@ -11,8 +11,11 @@
 #include "date.h"
 #include "ui.h"
 
-std::string GetString(const char *hint)
+std::string GetString(const char *hint, bool allowAutoFilename)
 {
+    if (allowAutoFilename && Config_AutomaticallySetFilenameAsDateTime)
+        return GetDate(DateTimeFormat::FORMAT_YMD);
+
     hidScanInput();
 
     u32 held = hidKeysHeld();

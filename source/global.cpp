@@ -32,6 +32,7 @@ bool hbl = false, devMode = false, kill = false;
 
 //config
 bool centered = true, autoBack = false, useLang = false;
+bool Config_AutomaticallySetFilenameAsDateTime = false;
 
 //default colors
 u8 clearColor[3] = {0, 0, 0};
