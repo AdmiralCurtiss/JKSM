@@ -16,9 +16,9 @@ std::string GetString(const char *hint)
 
     u32 held = hidKeysHeld();
     if(held & KEY_L)
-        return GetDate(FORMAT_YDM);
+        return GetDate(DateTimeFormat::FORMAT_YDM);
     else if(held & KEY_R)
-        return  GetDate(FORMAT_YMD);
+        return GetDate(DateTimeFormat::FORMAT_YMD);
 
     SwkbdState keyState;
     char input[64];
@@ -27,9 +27,9 @@ std::string GetString(const char *hint)
     swkbdSetHintText(&keyState, hint);
     swkbdSetFeatures(&keyState, SWKBD_PREDICTIVE_INPUT);
     SwkbdDictWord dates[2];
-    swkbdSetDictWord(&dates[0], "2016", GetDate(FORMAT_YDM));
-    swkbdSetDictWord(&dates[1], "2016", GetDate(FORMAT_YMD));
-    swkbdSetInitialText(&keyState, GetDate(FORMAT_YMD));
+    swkbdSetDictWord(&dates[0], "2016", GetDate(DateTimeFormat::FORMAT_YDM));
+    swkbdSetDictWord(&dates[1], "2016", GetDate(DateTimeFormat::FORMAT_YMD));
+    swkbdSetInitialText(&keyState, GetDate(DateTimeFormat::FORMAT_YMD));
     swkbdSetDictionary(&keyState, dates, 2);
 
     swkbdInputText(&keyState, input, 64);

@@ -5,7 +5,7 @@
 #include "date.h"
 
 //This returns the date as a c string
-char *GetDate(int Format)
+char *GetDate(DateTimeFormat Format)
 {
     char *Ret = new char[24];
 
@@ -15,12 +15,12 @@ char *GetDate(int Format)
 
     switch(Format)
     {
-        case FORMAT_YDM:
+        case DateTimeFormat::FORMAT_YDM:
             {
                 sprintf(Ret, "%04d-%02d-%02d_%02d-%02d-%02d", Time->tm_year + 1900, Time->tm_mday, Time->tm_mon + 1, Time->tm_hour, Time->tm_min, Time->tm_sec);
                 break;
             }
-        case FORMAT_YMD:
+        case DateTimeFormat::FORMAT_YMD:
             {
                 sprintf(Ret, "%04d-%02d-%02d_%02d-%02d-%02d", Time->tm_year + 1900, Time->tm_mon + 1, Time->tm_mday, Time->tm_hour, Time->tm_min, Time->tm_sec);
                 break;
