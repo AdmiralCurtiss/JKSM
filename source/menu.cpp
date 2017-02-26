@@ -136,7 +136,7 @@ void menu::handleInput(u32 key, u32 held)
             start--;
         if(size < 15)
             start = 0;
-        else if(selected == size && size > 15)
+        else if(selected == size && size >= 15)
             start = size - 14;
     }
     else if((key & KEY_DOWN) || ((held & KEY_DOWN) && fc == 10))
